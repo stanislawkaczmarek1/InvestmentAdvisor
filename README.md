@@ -2,7 +2,7 @@
 
 An application that analyzes stock prices and provides predictions using various algorithms.
 It allows users to input a text file with stock prices of a company from a given period, then generates a price chart and offers a general prediction on whether to buy, sell, or remain inactive.
-The goal of the project was to learn and apply design patterns, and it should not be considered as real investment advice 😊.
+The outputs of the app should not be considered as real investment advice 😊.
 
 ---
 
