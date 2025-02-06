@@ -9,10 +9,10 @@ The goal of the project was to learn and apply design patterns, and it should no
 ## **Technologies Used**
 
 - Java
-- MVC Pattern
+- MVC Architecture
 - Strategy Pattern
 - Observer Pattern
-- JFreeChart (for charting)
+- JFreeChart 
 
 ---
 
