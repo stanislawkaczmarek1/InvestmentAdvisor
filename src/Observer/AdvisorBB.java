@@ -1,6 +1,7 @@
 package Observer;
 
 import Controller.Controller;
+import Enums.TradeSignal;
 import Observable.Subject;
 import Strategy.AlgorithmBB;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class AdvisorBB extends InvestmentAdvisor implements Observer{
     private Subject subject;
     private ArrayList<Double> stockPrices = new ArrayList<>();
-    private int prediction;
+    private TradeSignal prediction;
     public AdvisorBB(Subject observableSubject){
         this.predictionStrategy = new AlgorithmBB();
         this.subject =observableSubject;

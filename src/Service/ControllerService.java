@@ -1,6 +1,8 @@
 package Service;
 
 
+import Enums.TradeSignal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -24,20 +26,20 @@ public class ControllerService {
         }
     }
 
-    public static int generalizePrediction(HashMap<Integer, Integer> predictionsMap){
-        ArrayList<Integer> predictionsList = new ArrayList<>(predictionsMap.values());
+    public static int generalizePrediction(HashMap<Integer, TradeSignal> predictionsMap){
+        ArrayList<TradeSignal> predictionsList = new ArrayList<>(predictionsMap.values());
         System.out.println(predictionsList);
         int sum1 = 0;
         int sum2 = 0;
         int sum3 = 0;
         for (int i = 0; i < predictionsList.size(); i++) {
-            if (predictionsList.get(i) == 1){
+            if (predictionsList.get(i) == TradeSignal.BUY){
                 sum1++;
             }
-            if (predictionsList.get(i) == 2){
+            if (predictionsList.get(i) == TradeSignal.SELL){
                 sum2++;
             }
-            if (predictionsList.get(i) == 3){
+            if (predictionsList.get(i) == TradeSignal.NO_SIGNAL){
                 sum3++;
             }
         }
@@ -69,16 +71,16 @@ public class ControllerService {
             return Color.DARK_GRAY;
         }
     }
-    public static ArrayList<String> generateAdvisorsText(HashMap<Integer, Integer> predictionsMap, ArrayList<Integer> observersHashCodes){
+    public static ArrayList<String> generateAdvisorsText(HashMap<Integer, TradeSignal> predictionsMap, ArrayList<Integer> observersHashCodes){
         ArrayList<String> advisorsText = new ArrayList<>();
-        ArrayList<Integer> predictionsValuesList = new ArrayList<>(predictionsMap.values());
+        ArrayList<TradeSignal> predictionsValuesList = new ArrayList<>(predictionsMap.values());
         ArrayList<Integer> predictionsKeysList = new ArrayList<>(predictionsMap.keySet());
         for (int i = 0; i < observersHashCodes.size(); i++) {
             for (int j = 0; j < predictionsKeysList.size(); j++) {
                 if ((predictionsKeysList.get(j)).equals(observersHashCodes.get(i))){
-                    if (predictionsValuesList.get(j) == 1){
+                    if (predictionsValuesList.get(j) == TradeSignal.BUY){
                         advisorsText.add("Buy");
-                    }else if (predictionsValuesList.get(j) == 2){
+                    }else if (predictionsValuesList.get(j) == TradeSignal.SELL){
                         advisorsText.add("Sell");
                     }else {
                         advisorsText.add("No signal");

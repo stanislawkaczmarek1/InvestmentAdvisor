@@ -1,12 +1,14 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AlgorithmSSAR implements PredictionStrategy{
     @Override
-    public int prediction(ArrayList<Double> stockPrices) {
+    public TradeSignal prediction(ArrayList<Double> stockPrices) {
         System.out.println("Simple Support and Resistance");
 
         List<Double> reversedList = new ArrayList<>(stockPrices);
@@ -19,13 +21,13 @@ public class AlgorithmSSAR implements PredictionStrategy{
 
         if (recentPrice > resistance) {
             System.out.println("SELL");
-            return 2;
+            return TradeSignal.SELL;
         } else if (recentPrice < support) {
             System.out.println("BUY");
-            return 1;
+            return TradeSignal.BUY;
         } else {
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
     }
 

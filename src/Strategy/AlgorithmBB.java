@@ -1,12 +1,14 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AlgorithmBB implements PredictionStrategy{
     @Override
-    public int prediction(ArrayList<Double> stockPrices) {
+    public TradeSignal prediction(ArrayList<Double> stockPrices) {
         System.out.println("Bollinger Bands: ");
 
         List<Double> reversedList = new ArrayList<>(stockPrices);
@@ -16,7 +18,7 @@ public class AlgorithmBB implements PredictionStrategy{
         int period = 20;
 
         if (stockPricesReversed.size()<period){
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
 
         double stdDevMultiplier = 2.0;
@@ -32,13 +34,13 @@ public class AlgorithmBB implements PredictionStrategy{
 
         if (lastPrice > upperBand) {
             System.out.println("SELL");
-            return 2;
+            return TradeSignal.SELL;
         } else if (lastPrice < lowerBand) {
             System.out.println("BUY");
-            return 1;
+            return TradeSignal.BUY;
         } else {
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
     }
 

@@ -1,12 +1,14 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AlgorithmMAC implements PredictionStrategy{
     @Override
-    public int prediction(ArrayList<Double> stockPrices) {
+    public TradeSignal prediction(ArrayList<Double> stockPrices) {
         System.out.println("Moving Average Crossover: ");
 
         List<Double> reversedList = new ArrayList<>(stockPrices);
@@ -18,7 +20,7 @@ public class AlgorithmMAC implements PredictionStrategy{
 
         if (stockPricesReversed.size()<longMA){
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
 
         double shortAvg = calculateMovingAverage(stockPricesReversed, shortMA);
@@ -26,14 +28,14 @@ public class AlgorithmMAC implements PredictionStrategy{
 
         if (shortAvg > longAvg) {
             System.out.println("BUY");
-            return 1;
+            return TradeSignal.BUY;
         }
         else if (shortAvg < longAvg) {
             System.out.println("SELL");
-            return 2;
+            return TradeSignal.SELL;
         } else {
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
     }
 

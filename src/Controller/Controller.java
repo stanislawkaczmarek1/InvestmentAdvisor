@@ -1,5 +1,6 @@
 package Controller;
 
+import Enums.TradeSignal;
 import Observable.Observable;
 import Service.ControllerService;
 import View.Gui;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 public class Controller {
     private static ArrayList<Double> stockPrices = new ArrayList<>();
-    private static HashMap<Integer, Integer> predictions = new HashMap<>(); //<advisor hashcode, advisor prediction>
+    private static HashMap<Integer, TradeSignal> predictions = new HashMap<>(); //<advisor hashcode, advisor prediction>
     private static ArrayList<String> advisorsText = new ArrayList<>();
     private static final ArrayList<Integer> observersHashCodes = new ArrayList<>();
     private static Observable observable;
@@ -34,7 +35,7 @@ public class Controller {
     public static void putStockPricesListToModel(){
         observable.setObservableData(stockPrices);
     }
-    public static void setDataFromModel(int hashCode, int prediction){
+    public static void setDataFromModel(int hashCode, TradeSignal prediction){
         predictions.put(hashCode, prediction);
         if (predictions.size() == observersHashCodes.size()){
             int generalPrediction = ControllerService.generalizePrediction(predictions);
@@ -84,11 +85,11 @@ public class Controller {
         Controller.stockPrices = stockPrices;
     }
 
-    public static HashMap<Integer, Integer> getPredictions() {
+    public static HashMap<Integer, TradeSignal> getPredictions() {
         return predictions;
     }
 
-    public static void setPredictions(HashMap<Integer, Integer> predictions) {
+    public static void setPredictions(HashMap<Integer, TradeSignal> predictions) {
         Controller.predictions = predictions;
     }
 

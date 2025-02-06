@@ -1,12 +1,14 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AlgorithmMACD implements PredictionStrategy {
     @Override
-    public int prediction(ArrayList<Double> stockPrices) {
+    public TradeSignal prediction(ArrayList<Double> stockPrices) {
         System.out.println("Moving Average Convergence Divergence: ");
 
         List<Double> reversedList = new ArrayList<>(stockPrices);
@@ -14,7 +16,7 @@ public class AlgorithmMACD implements PredictionStrategy {
         ArrayList<Double> stockPricesReversed = new ArrayList<>(reversedList);
 
         if (stockPricesReversed.size() < 26) {
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
 
         ArrayList<Double> ema12 = calculateEMA(stockPricesReversed, 12);
@@ -26,13 +28,13 @@ public class AlgorithmMACD implements PredictionStrategy {
 
         if (macdLine.get(lastIndex) > 0 && macdLine.get(lastIndex - 1) <= 0) {
             System.out.println("BUY");
-            return 1;
+            return TradeSignal.BUY;
         } else if (macdLine.get(lastIndex) < 0 && macdLine.get(lastIndex - 1) >= 0) {
             System.out.println("SELL");
-            return 2;
+            return TradeSignal.SELL;
         } else {
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
     }
 

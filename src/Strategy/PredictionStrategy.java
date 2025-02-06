@@ -1,7 +1,9 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 
 public interface PredictionStrategy {
-    int prediction(ArrayList<Double> stockPrices);
+    TradeSignal prediction(ArrayList<Double> stockPrices);
 }

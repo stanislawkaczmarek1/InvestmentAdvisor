@@ -1,12 +1,14 @@
 package Strategy;
 
+import Enums.TradeSignal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AlgorithmRSI implements PredictionStrategy{
     @Override
-    public int prediction(ArrayList<Double> stockPrices) {
+    public TradeSignal prediction(ArrayList<Double> stockPrices) {
 
         List<Double> reversedList = new ArrayList<>(stockPrices);
         Collections.reverse(reversedList);
@@ -16,7 +18,7 @@ public class AlgorithmRSI implements PredictionStrategy{
 
         if (stockPricesReversed.size()<period){
             System.out.println("Relative Strength Index");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
 
         double rsi = calculateRSI(stockPricesReversed, period);
@@ -24,13 +26,13 @@ public class AlgorithmRSI implements PredictionStrategy{
         System.out.println("Relative Strength Index ("+ rsi +"): ");
         if (rsi >= 70) {
             System.out.println("SELL");
-            return 2;
+            return TradeSignal.SELL;
         } else if (rsi <= 30) {
             System.out.println("BUY");
-            return 1;
+            return TradeSignal.BUY;
         } else {
             System.out.println("NO SIGNAL");
-            return 3;
+            return TradeSignal.NO_SIGNAL;
         }
     }
 
